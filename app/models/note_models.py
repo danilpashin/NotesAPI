@@ -14,8 +14,8 @@ class NoteResponse(BaseModel):
     id: int
     title: str
     content: str
-    createdAt: datetime
-    updatedAt: Optional[datetime] = None
+    created_at: datetime
+    updated_at: Optional[datetime] = None
 
 class Config:
     from_attributes=True

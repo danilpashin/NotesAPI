@@ -1,29 +1,22 @@
 from datetime import datetime
+from app.database import NoteDB
 from app.models.note_models import NoteResponse, NoteCreate
+from sqlalchemy.orm import Session
 
-_mock_notes = []
-_counter = 1
 
-def get_all_notes():
-    return _mock_notes
+class NoteCrud:
+    def __init__(self, db: Session):
+        self.db = db
 
-def get_note_by_id(note_id: int):
-    return {
-        "id": note_id,
-        "title": "Пример заметки",
-        "content": "Содержание",
-        "createdAt": datetime.now().isoformat(),
-        "updatedAt": None
-    }
+    def get_all_notes(self) -> list[NoteDB]:
+        return self.db.query(NoteDB).all()
 
-def create_note(note: NoteCreate):
-    global _counter
-    new_note = NoteResponse(
-        id=_counter,
-        title=note.title,
-        content=note.content,
-        createdAt="2026-01-01T00:00:00"
-    )
-    _counter += 1
-    _mock_notes.append(new_note)
-    return new_note
+    def get_note_by_id(self, note_id: int) -> NoteDB | None:
+        return self.db.query(NoteDB).filter(NoteDB.id == note_id).first()
+
+    def create_note(self, note: NoteCreate) -> NoteDB:
+        db_note = NoteDB(title=note.title, content=note.content)
+        self.db.add(db_note)
+        self.db.commit()
+        self.db.refresh(db_note)
+        return db_note
