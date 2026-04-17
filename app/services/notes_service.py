@@ -1,9 +1,9 @@
-from app.models.note_models import NoteCreate, NoteResponse
-from app.crud.notes_crud import NoteCrud
+from app.models.note_models import NoteCreate, NoteResponse, NoteUpdate
+from app.crud.notes_crud import NoteRepository
 
 
 class NoteService:
-    def __init__(self, crud: NoteCrud):
+    def __init__(self, crud: NoteRepository):
         self.crud = crud
 
     def get_all_notes(self) -> list[NoteResponse]:
@@ -19,3 +19,11 @@ class NoteService:
         if len(note.title) < 3:
             raise ValueError("Title too short")
         return self.crud.create_note(note)
+
+    def update_note_service(self, note_id: int, note: NoteUpdate) -> NoteResponse:
+        if len(note.title) < 3:
+            raise ValueError("Title too short")
+        return self.crud.update_note(note_id, note)
+
+    def delete_note_service(self, note_id: int) -> bool:
+        return self.crud.delete_note(note_id)
