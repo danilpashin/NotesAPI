@@ -1,5 +1,5 @@
 from datetime import datetime
-from app.database import NoteDB
+from app.database.database import NoteDB
 from app.models.note_models import NoteCreate, NoteUpdate
 from sqlalchemy.orm import Session
 

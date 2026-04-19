@@ -17,5 +17,5 @@ class NoteResponse(BaseModel):
     created_at: datetime
     updated_at: Optional[datetime] = None
 
-class Config:
-    from_attributes=True
+    class Config:
+        from_attributes=True

@@ -7,7 +7,8 @@ class NoteService:
         self.crud = crud
 
     def get_all_notes(self) -> list[NoteResponse]:
-        return self.crud.get_all_notes()
+        notes = self.crud.get_all_notes()
+        return notes
 
     def get_note_by_id(self, note_id: int) -> NoteResponse | None:
         note = self.crud.get_note_by_id(note_id)
