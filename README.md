@@ -1,6 +1,6 @@
 # Notes API
 
-REST API for notes control with FastAPI + SQLAlchemy + PostgreSQL
+REST API for notes control with FastAPI + SQLAlchemy + PostgreSQL + Alembic + Docker + Docker Compose
 
 ## About 
 
@@ -15,6 +15,8 @@ REST API for notes control with FastAPI + SQLAlchemy + PostgreSQL
 - **PostgreSQL** — database
 - **Pytest** — testing
 - **Alembic** - migrations
+- **Docker** - containers
+- **Docker Compose** - containers orchestration
 
 ## Install and Run
 
@@ -54,3 +56,16 @@ REST API for notes control with FastAPI + SQLAlchemy + PostgreSQL
 7. **Open in browser**
 - Notes: http://127.0.0.1:8000/notes/
 - Health: http://127.0.0.1:8000/health/
+
+
+## Using with Docker Desktop
+
+1. **Clone repo**
+   ```bash
+   git clone https://github.com/danilpashin/NotesAPI
+   cd NotesAPI
+   ```
+2. **Run containers**
+    ```bash
+    docker compose up
+    ```
