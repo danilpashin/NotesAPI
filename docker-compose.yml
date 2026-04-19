@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres_db:
+      image: postgres:17.9-alpine3.22
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=123
+        - POSTGRES_DB=notes
+      ports:
+        - "5432:5432"
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+
+  notes-api:
+    build: .
+    ports:
+      - "8000:8000"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - DB_HOST=postgres_db
+      - DB_NAME=notes
+      - APP_DB_USER=postgres
+      - APP_DB_PASSWORD=123
+    depends_on:
+      - postgres_db
+  
+
+volumes:
+  postgres_data:
