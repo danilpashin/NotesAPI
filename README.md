@@ -14,6 +14,7 @@ REST API for notes control with FastAPI + SQLAlchemy + PostgreSQL
 - **SQLAlchemy** — ORM
 - **PostgreSQL** — database
 - **Pytest** — testing
+- **Alembic** - migrations
 
 ## Install and Run
 
